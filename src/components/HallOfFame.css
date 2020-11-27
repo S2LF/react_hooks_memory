@@ -1,0 +1,19 @@
+.hallOfFame {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .hallOfFame .date,
+  .hallOfFame .score {
+    width: 20%;
+    text-align: center;
+  }
+  
+  .hallOfFame tr:nth-child(even) {
+    background: #eee;
+  }
+
+  tbody td{
+      border: 1px black solid;
+      text-align: center;
+  }
