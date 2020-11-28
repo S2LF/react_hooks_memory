@@ -72,22 +72,31 @@ function App(): JSX.Element {
 
   const won = matchCardIndices.length === cards.length;
   return (
-    <div>
-      <GuessCount guesses={guesses} />
-      <div className="memory">
-        {cards.map((card, index) => (
-          <Card
-            card={card}
-            feedback={getFeedbackForCard(index)}
-            onClick={handleCardClick}
-            // eslint-disable-next-line react/no-array-index-key
-            key={index}
-            index={index}
-          />
-        ))}
-        {won && <HallOfFame />}
+    <>
+      <h1 className="title">Memory</h1>
+      <div className="game">
+        {/* <h1>Memory</h1> */}
+        <main>
+          <GuessCount guesses={guesses} />
+          <div className="memory">
+            {cards.map((card, index) => (
+              <Card
+                card={card}
+                feedback={getFeedbackForCard(index)}
+                onClick={handleCardClick}
+                // eslint-disable-next-line react/no-array-index-key
+                key={index}
+                index={index}
+              />
+            ))}
+            {won && ''}
+          </div>
+        </main>
+        <aside>
+          <HallOfFame />
+        </aside>
       </div>
-    </div>
+    </>
   );
 }
 

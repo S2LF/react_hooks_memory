@@ -13,13 +13,20 @@ function HallOfFame() {
     <>
       <h2>HighScores :</h2>
       <table className="hallOfFame">
+        <thead>
+          <th>N°</th>
+          <th>Score</th>
+          <th>Joueur</th>
+          <th>Date</th>
+        </thead>
         <tbody>
-          {FAKE_HOF.map(({ id, guesses, date, player }) => {
+          {FAKE_HOF.map(({ id, guesses, date, player }, index) => {
             return (
               <tr key={id}>
-                <td className="date">{date}</td>
+                <td>{index + 1}</td>
                 <td className="score">{guesses}</td>
                 <td className="player">{player}</td>
+                <td className="date">{date}</td>
               </tr>
             );
           })}

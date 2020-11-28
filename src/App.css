@@ -5,3 +5,19 @@
   margin: auto;
   user-select: none;
 }
+
+.game main{
+  flex-basis: 400px;
+}
+aside{
+  flex-basis: 600px;
+}
+
+.game{
+  display: flex;
+  justify-content: space-around;
+}
+
+.title{
+  text-align: center;
+}
