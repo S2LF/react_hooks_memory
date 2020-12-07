@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import shuffle from 'lodash.shuffle';
 import './App.css';
+import Axios from 'axios';
 import Card from './components/Card';
 import GuessCount from './components/GuessCount';
-import HallOfFame from './components/HallOfFame';
+import HallOfFame, { HoFTypes } from './components/HallOfFame';
+import HoFInput from './components/HoFInput';
 
 function App(): JSX.Element {
   const SIDE = 6;
@@ -13,7 +15,7 @@ function App(): JSX.Element {
   const [guesses, setGuesses] = useState(0);
   const [currentPair, setCurrentPair] = useState<number[]>([]);
   const [matchCardIndices, setMatchCardIndices] = useState<number[]>([]);
-  const [hallOfFame, setHallOfFame] = useState(null);
+  const [hallOfFame, setHallOfFame] = useState<HoFTypes[]>([]);
 
   function generateCard() {
     const result = [];
@@ -25,6 +27,7 @@ function App(): JSX.Element {
     }
     return shuffle(result);
   }
+
   const [cards, setCards] = useState(generateCard());
 
   function handleNewPairClosedBy(index: number) {
@@ -71,11 +74,31 @@ function App(): JSX.Element {
   }
 
   const won = matchCardIndices.length === cards.length;
+
+  useEffect(() => {
+    const fetchMemories = async () => {
+      try {
+        const result = await Axios('http://localhost:5000/api/memories');
+        setHallOfFame(result.data.result);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchMemories();
+  }, []);
+
+  function restartGame(new_scored: HoFTypes) {
+    setCards(generateCard());
+    setGuesses(0);
+    setMatchCardIndices([]);
+    setHallOfFame([{ ...new_scored, justNew: true }, ...hallOfFame]);
+  }
+
   return (
     <>
       <h1 className="title">Memory</h1>
       <div className="game">
-        {/* <h1>Memory</h1> */}
         <main>
           <GuessCount guesses={guesses} />
           <div className="memory">
@@ -89,11 +112,18 @@ function App(): JSX.Element {
                 index={index}
               />
             ))}
-            {won && ''}
+            {won && (
+              <HoFInput
+                guesses={guesses}
+                onSuccess={(new_scored: HoFTypes) => {
+                  restartGame(new_scored);
+                }}
+              />
+            )}
           </div>
         </main>
         <aside>
-          <HallOfFame />
+          <HallOfFame HoF={hallOfFame} />
         </aside>
       </div>
     </>

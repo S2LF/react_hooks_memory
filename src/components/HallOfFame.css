@@ -17,3 +17,9 @@
       border: 1px black solid;
       text-align: center;
   }
+
+  table.hallOfFame tr.new {
+    background-color: green;
+    color:white;
+    font-weight: bold;
+  }

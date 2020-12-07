@@ -1,7 +1,7 @@
 import React from 'react';
 import './GuessCount.css';
 
-type GuessType = {
+export type GuessType = {
   guesses: number;
 };
 
