@@ -5,6 +5,7 @@ type CardType = {
   card: string | undefined;
   feedback: string;
   index: number;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onClick: any;
 };
 
