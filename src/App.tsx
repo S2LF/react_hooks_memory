@@ -78,7 +78,9 @@ function App(): JSX.Element {
   useEffect(() => {
     const fetchMemories = async () => {
       try {
-        const result = await Axios('http://localhost:5000/api/memories');
+        const result = await Axios(
+          `${process.env.REACT_APP_API_CALL}/api/memories`
+        );
         setHallOfFame(result.data.result);
       } catch (err) {
         console.log(err);
@@ -97,7 +99,7 @@ function App(): JSX.Element {
 
   return (
     <>
-      <h1 className="title">Memory</h1>
+      <h1 className="title">Memory {process.env.REACT_APP_API_CALL}</h1>
       <div className="game">
         <main>
           <GuessCount guesses={guesses} />
