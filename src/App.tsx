@@ -45,7 +45,7 @@ function App(): JSX.Element {
   }
 
   function handleCardClick(index: number, feedback: string) {
-    console.log('click', index, feedback);
+    // console.log('click', index, feedback);
 
     if (currentPair.length === 2 || feedback === 'visible') {
       return;
@@ -99,7 +99,7 @@ function App(): JSX.Element {
 
   return (
     <>
-      <h1 className="title">Memory {process.env.REACT_APP_API_CALL}</h1>
+      <h1 className="title">Memory</h1>
       <div className="game">
         <main>
           <GuessCount guesses={guesses} />

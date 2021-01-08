@@ -32,7 +32,7 @@ function HoFInput({ guesses, onSuccess }: HoFInputType): JSX.Element {
         if (result.data.success) {
           setError('');
           setName('');
-          console.log(result.data.result);
+          // console.log(result.data.result);
           onSuccess(result.data.result);
         }
       } catch (err) {
