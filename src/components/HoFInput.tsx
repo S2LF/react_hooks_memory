@@ -21,11 +21,14 @@ function HoFInput({ guesses, onSuccess }: HoFInputType): JSX.Element {
       setError('Le nom doit avoir au moins 1 caractère');
     } else {
       try {
-        const result = await Axios.post(`${process.env.REACT_APP_API_CALL}/api/memories`, {
-          name,
-          guesses,
-          date,
-        });
+        const result = await Axios.post(
+          `${process.env.REACT_APP_API_CALL}/api/memories`,
+          {
+            name,
+            guesses,
+            date,
+          }
+        );
         if (result.data.success) {
           setError('');
           setName('');
